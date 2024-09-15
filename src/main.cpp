@@ -131,7 +131,7 @@ class NNGarden : public bigg::Application
 	}
 public:
 	NNGarden()
-		: bigg::Application( "NNGarden" ) {
+		: bigg::Application( "MLGarden" ) {
 		printf("NNGarden constructor\n");
 
 	}
