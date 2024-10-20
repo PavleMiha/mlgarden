@@ -946,7 +946,7 @@ void ComputationGraph::show_node(Index i, vector<Function>& functions) {
 		if (currentValue.m_operation == Operation::Result)
 			ImGui::Text("Result");
 		if (currentValue.m_operation == Operation::Backwards)
-			ImGui::Text("Backwards");
+			ImGui::Text("Backprop");
 		ImGui::PopItemWidth();
 		ImGui::PopStyleColor();
 	}
