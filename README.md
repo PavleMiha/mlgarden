@@ -110,13 +110,43 @@ We did it! Although, we probably could have figured out an equation for this dat
 
 A donut. Let's try it with out previous model
 
-After we have this function defined, we can go point by point in the dataset and adjust our free parameters to make the error smaller and smaller and smaller. Let's try it.
-
 <p align="center">
-<img src="https://github.com/user-attachments/assets/7ee400fd-25cd-4c59-b0d6-5fd5d2b3bbf2)" width="700" >
+<img src="https://github.com/user-attachments/assets/42dfc791-4fbe-41cd-aaa2-6647a92ddc3a" width="700" >
 </p>
 
-Very quickly the model seems to give up, and simply label everything as halfway in between both labels - this makes sense. The model can only express datasets that are split by a line that passes through 0, 0. That's its *inductive bias*. So in this case, what reduces the error is to simply predict 0 for whichever point you pass in. 
+Very quickly the model seems to give up, and simply label everything as halfway in between both labels - this makes sense. The model can only express datasets that are split by a line that passes through 0, 0. That's its *inductive bias*. So in this case, what reduces the error is to simply predict 0 for whichever point you pass in. How can we make a model that with the right parameters _can_ represent the data? We could for example feed into the model each point's distance to 0,0, and then do our multiply by a parameter and adding a parameter:
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/929391c3-cca3-402a-9d45-0d9bca20a1c4" width="700" >
+</p>
+
+It works! But this feels like cheating - the whole point of this backpropagation business was to not have to figure out things by hand, and now we're designing models based on which shapes we recognise in the data. Is there a class of models that can represent all or most distributions, is scalable, and can be backpropagated through? Hard to tell [who figured it out first](https://en.wikipedia.org/wiki/Backpropagation#History) but inspired by neurons, people figured out that you can make a network of fake, simplified neurons, called perceptrons, where each perceptron takes a bunch of inputs, multiplies each input by some weight, adds a bias, and then applies a non-linearity to the result (like our Tanh). You can then feed these perceptrons into each other, and make a model that can represent any arbitrary function (as long as it has enough perceptrons). Let's see what a single perceptron looks like:
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/27e2072f-0b18-4cce-b674-9ef9686a21f4" width="700" >
+</p>
+
+It's actually the exact same network that could predict lines above, the x and the y get multiplied by a parameter each, and then added to another free parameter, and then put through a non-linear function (tanh). Like before, it can't really model this dataset. But what happens if make 2 different perceptrons, and then feed the whole thing into another perceptron?
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/e34025cc-d04c-4daf-8db2-ffbc7cf5fc60" width="700" >
+</p>
+
+It already does quite well! but the nice thing about perceptrons is we can keep stacking them, let's add one more:
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/75878ed4-80d3-4a04-96d4-ab4c4df6c869" width="700" >
+</p>
+
+It does a little blurry triangle now. This makes some sense, the first "layer" of perceptrons defines a linear boundary each, and then the second perceptron adds them all up to define the shape. Let's add one more and clean it up at little:
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/e7cf8041-a70c-48d9-955e-87112914e0bb" width="700" >
+</p>
+
+It gets maybe a little better, but honestly it seems that we have enough perceptrons to do really well at classifying the points in this dataset.
+
+
 
 WIP -- TBC
 ## How to build
