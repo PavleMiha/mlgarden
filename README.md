@@ -2,7 +2,7 @@
 
 MLGarden allows you to go from an empty slate to a relatively complex neural network, using a visual editor, no linear algebra, and nothing past high school math. You can play along by downloading a release and building your own networks while you read.
 
-Make sure to play the gifs in this write-up! They don't autoplay on github, the play button is on the top right ⬇️
+Make sure to play the gifs in this write-up! They don't autoplay on github, the play button is in the top right ⬇️
 <p align="center">
 <img src="https://github.com/user-attachments/assets/60efbd39-f9ef-4d2e-9052-42242dadb13f" width="700" >
 </p>
@@ -20,7 +20,7 @@ So what can you do in ML Garden? You can make computation graphs such as this on
 
 All this is, is a different way of expressing (5 + 3) * 2 = 16
 
-Why is this useful? Well, for one, we don't need parenthesis, you just do your calculations from left to right. But there's another advantage: say that we want to change the three parameters, a, b and c, to make the result 10 instead of 16. One way we can do this is by moving each parameter, checking whether the result is going closer or further from 10, and then nudge it in the direction that makes it closer to 10.
+Why is this useful? Well, for one, we don't need parenthesis, you just do your calculations from left to right. But there's another advantage: say that we want to change the three parameters, a, b and c, to make the result 10 instead of 16. One way we can do this is by moving each parameter, checking whether the result is going closer or further from 10, and then nudge it in the direction that makes it closer to 10 (GIF)
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/eaae4a93-26df-4bac-ab3f-54cc1afbe26d" width="700" >
@@ -66,13 +66,13 @@ And the benefit of this is that we can keep going, no matter how deep the graph 
 <img src="https://github.com/user-attachments/assets/a008aafd-ef5f-4abe-a03b-aef81341cda9" width="700" >
 </p>
 
-You can scale this up to literally billions of operations! But getting back to our example, how can we make the result 10? We could notice that the result is higher than 10, and therefore nudge all the parameters in the direction that makes the result smaller, until it reaches 10
+You can scale this up to literally billions of operations! But getting back to our example, how can we make the result 10? We could notice that the result is higher than 10, and therefore nudge all the parameters in the direction that makes the result smaller, until it reaches 10 (GIF)
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/553d174b-a4af-4e4f-9cc7-0aa54f58aa9a" width="700" >
 </p>
 
-Can we systematise this for any result we might want? We could create an **error function** that quantifies how wrong we are. A good example here is to take the result of the graph, subtract the desired result (10) from it, and then take the square of that difference, so that value will always go up as the error goes up. Then we could take the derivative of this error, and nudge all the parameters to make the error go down. That's the basis of all deep learning! As long as you can define an error function, you can optimise a large computation graph to lower that error. Let's see what that looks like:
+Can we systematise this for any result we might want? We could create an **error function** that quantifies how wrong we are. A good example here is to take the result of the graph, subtract the desired result (10) from it, and then take the square of that difference, so that value will always go up as the error goes up. Then we could take the derivative of this error, and nudge all the parameters to make the error go down. That's the basis of all deep learning! As long as you can define an error function, you can optimise a large computation graph to lower that error. Let's see what that looks like (GIF):
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/3195aa37-b2fd-4227-acf0-42293c1a7b95" width="700" >
@@ -95,7 +95,7 @@ This is our dataset, each dot is a data point, and each point has an x coordinat
 
 So we will make a prediction, somehow, and then subtract from that prediction the result we know is right (the label), and then square that difference (so that the error is always positive, and so that decreasing the error is always good). Note that there are actually other was of defining the error function, they mostly all work as long as you get a more useful result when the error goes down.
 
-How do we predict this value? Back propagation is pretty forgiving, in this case as long as we have a function that has the ability to describe this dataset, it'll find the right free parameters for it. Now it would be nicer if we didn't have to go in and manually poke the parameters around, so there's a Training window that'll do this process for you, you simply press play and it'll nudge every free paramater by it's derivative to the backprop node (usually the error), go to the next data point, and do it again. As an additional nicety it'll color in the dataset window based on the result node - checking what the result would be for every point in the graph window. Let's try a potential function, just taking the x coordinate of each point, multiplying it by some value, adding some other value to it, and then using [tanh](https://reference.wolfram.com/language/ref/Tanh.html#:~:text=Tanh%20is%20the%20hyperbolic%20tangent,of%20the%20natural%20logarithm%20Log.) to slam it to either -1 or 1.
+How do we predict this value? Back propagation is pretty forgiving, in this case as long as we have a function that has the ability to describe this dataset, it'll find the right free parameters for it. Now it would be nicer if we didn't have to go in and manually poke the parameters around, so there's a Training window that'll do this process for you, you simply press play and it'll nudge every free paramater by it's derivative to the backprop node (usually the error), go to the next data point, and do it again. As an additional nicety it'll color in the dataset window based on the result node - checking what the result would be for every point in the graph window. Let's try a potential function, just taking the x coordinate of each point, multiplying it by some value, adding some other value to it, and then using [tanh](https://reference.wolfram.com/language/ref/Tanh.html#:~:text=Tanh%20is%20the%20hyperbolic%20tangent,of%20the%20natural%20logarithm%20Log.) to slam it to either -1 or 1 (GIF):
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/918c9147-a3b7-4804-9be6-5532cf5258d9" width="700" >
@@ -113,7 +113,7 @@ We did it! Although, we probably could have figured out an equation for this dat
 <img src="https://github.com/user-attachments/assets/0710da57-7f83-416c-aedf-ab1637777017" width="700" >
 </p>
 
-A donut. Let's try it with out previous model
+A donut. Let's try it with out previous model (GIF):
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/42dfc791-4fbe-41cd-aaa2-6647a92ddc3a" width="700" >
@@ -131,13 +131,13 @@ It works! But this feels like cheating - the whole point of this backpropagation
 <img src="https://github.com/user-attachments/assets/27e2072f-0b18-4cce-b674-9ef9686a21f4" width="700" >
 </p>
 
-It's actually the exact same network that could predict lines above, the x and the y get multiplied by a parameter each, and then added to another free parameter, and then put through a non-linear function (tanh). Like before, it can't really model this dataset. But what happens if make 2 different perceptrons, and then feed the whole thing into another perceptron?
+It's actually the exact same network that could predict lines above, the x and the y get multiplied by a parameter each, and then added to another free parameter, and then put through a non-linear function (tanh). Like before, it can't really model this dataset. But what happens if make 2 different perceptrons, and then feed the whole thing into another perceptron? (GIF)
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/e34025cc-d04c-4daf-8db2-ffbc7cf5fc60" width="700" >
 </p>
 
-It already does quite well! but the nice thing about perceptrons is we can keep stacking them, let's add one more:
+It already does quite well! but the nice thing about perceptrons is we can keep stacking them, let's add one more (GIF):
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/75878ed4-80d3-4a04-96d4-ab4c4df6c869" width="700" >
@@ -151,7 +151,7 @@ It does a little blurry triangle now. This makes some sense, the first "layer" o
 
 It gets maybe a little better, but honestly it seems that we have enough perceptrons to do really well at classifying the points in this dataset.
 
-What about this dataset?
+What about this dataset? (GIF)
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/6020bdc9-d915-4015-acbf-2b3856fa4a35" width="700" >
@@ -163,7 +163,7 @@ As you can see, it doesn't do great. We can try doubling the amount of perceptro
 <img src="https://github.com/user-attachments/assets/979d2a37-febf-4c06-9f57-d2a97d9da838" width="700" >
 </p>
 
-What if, instead of a single layer with 8, we do 2 layers of 4? This is going to be a lot of connecting:
+What if, instead of a single layer with 8, we do 2 layers of 4? This is going to be a lot of connecting (GIF):
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/60efbd39-f9ef-4d2e-9052-42242dadb13f" width="700" >
@@ -175,7 +175,7 @@ You can see the second layer perceptrons need 4 inputs each. Results are somewha
 <img src="https://github.com/user-attachments/assets/a809fd3f-fee4-4b68-85e2-bb924e1ce1e6" width="700" >
 </p>
 
-Look on my Works, ye Mighty, and despair! Hopefully by now you're beginning to understand why this isn't how neural networks actually get built. If you count the connections between the first layer and the second, you'll see that there are (4*8) connections, and that this whole web of operations can be neatly described by a 8x4 matrix, but that's exactly what we were not doing. How well does this do though?
+Look on my Works, ye Mighty, and despair! Hopefully by now you're beginning to understand why this isn't how neural networks actually get built. If you count the connections between the first layer and the second, you'll see that there are (4*8) connections, and that this whole web of operations can be neatly described by a 8x4 matrix, but that's exactly what we were not doing. How well does this do though? (GIF)
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/945f43cb-a4df-4808-8602-d77d6c2c1a1b" width="700" >
@@ -189,7 +189,7 @@ OK, the final boss:
 <img src="https://github.com/user-attachments/assets/56cd9dd8-c766-4ad3-8967-5c751b690056" width="700" >
 </p>
 
-Let's see how well the current network does:
+Let's see how well the current network does (GIF):
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/29574601-1960-47e4-9676-23799d195825" width="700" >
@@ -201,7 +201,7 @@ Not bad! It does take a while to get there so you can start to understand why ML
 <img src="https://github.com/user-attachments/assets/2f50dcf2-6677-4ffa-bc5f-2d4e839f391c" width="700" >
 </p>
 
-Our new first layer perceptron, with some sines it can use. One last time:
+Our new first layer perceptron, with some sines it can use. One last time (GIF):
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/5b941afb-647b-4d72-bfa6-e572505142d2" width="700" >
