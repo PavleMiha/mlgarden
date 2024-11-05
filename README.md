@@ -146,9 +146,78 @@ It does a little blurry triangle now. This makes some sense, the first "layer" o
 
 It gets maybe a little better, but honestly it seems that we have enough perceptrons to do really well at classifying the points in this dataset.
 
+What about this dataset?
 
+<p align="center">
+<img src="https://github.com/user-attachments/assets/6020bdc9-d915-4015-acbf-2b3856fa4a35" width="700" >
+</p>
 
-WIP -- TBC
+As you can see, it doesn't do great. We can try doubling the amount of perceptrons:
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/979d2a37-febf-4c06-9f57-d2a97d9da838" width="700" >
+</p>
+
+What if, instead of a single layer with 8, we do 2 layers of 4? This is going to be a lot of connecting:
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/60efbd39-f9ef-4d2e-9052-42242dadb13f" width="700" >
+</p>
+
+You can see the second layer perceptrons need 4 inputs each. Results are somewhat better! But we can do better still! Let's do 8 perceptrons in the first layer, and then connect them all to a second layer.
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/a809fd3f-fee4-4b68-85e2-bb924e1ce1e6" width="700" >
+</p>
+
+Look on my Works, ye Mighty, and despair! Hopefully by now you're beginning to understand why this isn't how neural networks actually get built. If you count the connections between the first layer and the second, you'll see that there are (4*8) connections, and that this whole web of operations can be neatly described by a 8x4 matrix, but that's exactly what we were not doing. How well does this do though?
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/945f43cb-a4df-4808-8602-d77d6c2c1a1b" width="700" >
+</p>
+
+That's satisfying! You can see me fiddle with some of the numbers in the training menu - one of them is the learning rate, how much we judge the parameters' values by each time we look at a sample, the other is the batch size - instead of looking at samples one by one, we look at 50 (and later on 500) and average out all their gradients. For serious neural networks there are training schedules where the learning rate decreases as the model learns, but here we just ping it down whenever, you can see when it needs lowering because the average error (also in the training window) starts ping ponging up and down.
+
+OK, the final boss:
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/56cd9dd8-c766-4ad3-8967-5c751b690056" width="700" >
+</p>
+
+Let's see how well the current network does:
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/29574601-1960-47e4-9676-23799d195825" width="700" >
+</p>
+
+Not bad! It does take a while to get there so you can start to understand why ML people spend so much time on twitter, but it gets it pretty well. We could of course make the current layers wider, or add more layers, but there's also another old trick up our sleeves, engineering new features! Instead of just passing x and y into the first layer, we could also pass in the distance from some learned point, or the sine of x and y with some offset, for example.
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/2f50dcf2-6677-4ffa-bc5f-2d4e839f391c" width="700" >
+</p>
+
+Our new first layer perceptron, with some sines it can use. One last time:
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/5b941afb-647b-4d72-bfa6-e572505142d2" width="700" >
+</p>
+
+And how well does it do?
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/6c182db8-cd85-463c-8342-5fabe24d844a" width="700" >
+</p>
+
+Pretty good! You might ntice that the model never quite predicts a spiral outside of the spiral that's in the data. As far as the model is concerned, only the points matter, it has no concept of a spiral. The spiral is *your* inductive bias. This is sometimes what people worry about, that if we give a model a ton of examples for what's a good thing to do, when it's presented with a data point that's *out of distribution*, somewhere off the spiral, it won't actually know the pattern.
+
+Go make your own network! You can collapse some of the nodes into functions to make it easier to read, and you can keep on adding new features, more layers, wider layers and seeing what happens. This seems to be what ML people spend a lot of time doing, finding good datasets, with useful error rates, and then figuring out ways to combine that data into new features, add more layers without breaking the training process (as long as you can run backprop on a model it'll learn, but with big networks you can run into issues where the gradients become tiny or huge and everything goes out of control), and hook up giant computers to train bigger models for longer. It mostly seems to be an empirical science, in a paper discussing different activation functions (the tanh we're using is no longer popular, people use functions like [ReLU and SwiGLU](https://medium.com/@jiangmen28/beyond-relu-discovering-the-power-of-swiglu-%E8%B6%85%E8%B6%8A-relu-%E5%8F%91%E7%8E%B0-swiglu-%E7%9A%84%E5%8A%9B%E9%87%8F-9dbc7d8258bf)) the authors describe this incredible ability to learn no matter what as "divine benevolence".
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/1e3e3428-5105-41b1-94e2-1c5fd8a14cda" width="700" >
+</p>
+
+I do think there's something divine about it - measuring and nudging and eventually creating something incredibly powerful - god knows where it'll take us.
+
 ## How to build
 
 ```
