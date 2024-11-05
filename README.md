@@ -2,6 +2,7 @@
 
 MLGarden allows you to go from an empty slate to a relatively complex neural network, using a visual editor, no linear algebra, and nothing past high school math. You can play along by downloading a release and building your own networks while you read.
 
+Make sure to play the gifs in this write-up! They don't autoplay on github, the play button is on the top right ⬇️
 <p align="center">
 <img src="https://github.com/user-attachments/assets/60efbd39-f9ef-4d2e-9052-42242dadb13f" width="700" >
 </p>
