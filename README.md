@@ -221,7 +221,7 @@ Go make your own network! You can collapse some of the nodes into functions to m
 <img src="https://github.com/user-attachments/assets/1e3e3428-5105-41b1-94e2-1c5fd8a14cda" width="700" >
 </p>
 
-I do think there's something divine about it - measuring and nudging and eventually creating something incredibly powerful - god knows where it'll take us.
+I do think there's something magical about it - measuring and nudging and eventually creating something incredibly powerful - like hitting stones together and starting a forest fire. If you have any thoughts or suggestions on MLGarden, drop an issue or email me at miha.pavle at gmail com
 
 ## How to build
 
