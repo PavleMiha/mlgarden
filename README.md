@@ -231,3 +231,4 @@ mkdir build
 cd build
 cmake ..
 ```
+Note: Release builds are quite a bit faster than debug builds, because all the backpropagation is running single threaded on the CPU on the same thread as the rendering code.
