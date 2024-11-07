@@ -216,7 +216,7 @@ So let's add these new engineered inputs, and then add some more inputs into the
 Let's see what it can do:
 
 <p align="center">
-<img src="https://github.com/user-attachments/assets/ca72b60f-66c6-447f-ac05-c7993045f99c" width="700" >
+<img src="https://github.com/user-attachments/assets/1ac8b53e-20d3-43a5-9ff2-5b0b40e67928" width="700" >
 </p>
 
 Pretty good! You might ntice that the model never quite predicts a spiral outside of the spiral that's in the data. As far as the model is concerned, only the points matter, it has no concept of a spiral. The spiral is *your* inductive bias. This is sometimes what people worry about, that if we give a model a ton of examples for what's a good thing to do, when it's presented with a data point that's *out of distribution*, somewhere off the spiral, it won't actually know the pattern that we think it knows. The model is *misaligned* with out ideas of what it should know.
