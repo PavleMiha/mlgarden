@@ -201,19 +201,25 @@ Not bad! It does take a while to get there so you can start to understand why ML
 <img src="https://github.com/user-attachments/assets/2f50dcf2-6677-4ffa-bc5f-2d4e839f391c" width="700" >
 </p>
 
-Our new first layer perceptron, with some sines it can use. One last time (GIF):
+Our new first layer perceptron, with some sines it can use. The number of connections is getting huge, luckily we can collapse a set of nodes into a function:
 
 <p align="center">
-<img src="https://github.com/user-attachments/assets/5b941afb-647b-4d72-bfa6-e572505142d2" width="700" >
+<img src="https://github.com/user-attachments/assets/8dfe2b0c-b300-4e65-9978-7d3282cf9f4f" width="700" >
 </p>
 
-And how well does it do?
+So let's add these new engineered inputs, and then add some more inputs into the middle layer (watch me develop carpal tunnel and develop a hard-fought appreciation for linear algebra and pytorch):
 
 <p align="center">
-<img src="https://github.com/user-attachments/assets/6c182db8-cd85-463c-8342-5fabe24d844a" width="700" >
+<img src="https://github.com/user-attachments/assets/2e8cb948-0078-4363-a924-07c3b5f73dc8" width="700" >
 </p>
 
-Pretty good! You might ntice that the model never quite predicts a spiral outside of the spiral that's in the data. As far as the model is concerned, only the points matter, it has no concept of a spiral. The spiral is *your* inductive bias. This is sometimes what people worry about, that if we give a model a ton of examples for what's a good thing to do, when it's presented with a data point that's *out of distribution*, somewhere off the spiral, it won't actually know the pattern.
+Let's see what it can do:
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/ca72b60f-66c6-447f-ac05-c7993045f99c" width="700" >
+</p>
+
+Pretty good! You might ntice that the model never quite predicts a spiral outside of the spiral that's in the data. As far as the model is concerned, only the points matter, it has no concept of a spiral. The spiral is *your* inductive bias. This is sometimes what people worry about, that if we give a model a ton of examples for what's a good thing to do, when it's presented with a data point that's *out of distribution*, somewhere off the spiral, it won't actually know the pattern that we think it knows. The model is *misaligned* with out ideas of what it should know.
 
 Go make your own network! You can collapse some of the nodes into functions to make it easier to read, and you can keep on adding new features, more layers, wider layers and seeing what happens. This seems to be what ML people spend a lot of time doing, finding good datasets, with useful error rates, and then figuring out ways to combine that data into new features, add more layers without breaking the training process (as long as you can run backprop on a model it'll learn, but with big networks you can run into issues where the gradients become tiny or huge and everything goes out of control), and hook up giant computers to train bigger models for longer. It mostly seems to be an empirical science, in a paper discussing different activation functions (the tanh we're using is no longer popular, people use functions like [ReLU and SwiGLU](https://medium.com/@jiangmen28/beyond-relu-discovering-the-power-of-swiglu-%E8%B6%85%E8%B6%8A-relu-%E5%8F%91%E7%8E%B0-swiglu-%E7%9A%84%E5%8A%9B%E9%87%8F-9dbc7d8258bf)) the authors describe this incredible ability to learn no matter what as "divine benevolence".
 
