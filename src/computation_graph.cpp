@@ -42,7 +42,13 @@ void ComputationGraph::collapse_to_new_function(Index* indices, size_t num_indic
 	function.m_id = functions.size();
 	function.m_json = json_data;
 	function.m_num_inputs = function.m_json["unmatched_inputs"].size();
-	function.m_num_outputs = function.m_json["unmatched_outputs"].size();
+
+	std::set<Socket> output_sockets;
+	for (int i = 0; i < function.m_json["unmatched_outputs"].size(); i++) {
+		output_sockets.insert(Socket(function.m_json["unmatched_outputs"][i]["start"], function.m_json["unmatched_outputs"][i]["start_slot"]));
+	}
+
+	function.m_num_outputs = output_sockets.size();
 	functions.push_back(function);
 	printf("FUNCTION: %s", function.m_json.dump(4).c_str());
 
@@ -467,7 +473,7 @@ json ComputationGraph::to_json(Index* indices, const ImVec2& origin, int num) co
 	for (int i = 0; i < next_free_index; i++) {
 		if (used[i]) {
 			if (index_to_json_index.find(i) == index_to_json_index.end()) {
-				for (int j = 0; j < next_free_index; j++) {
+				for (int j = 0; j < MAX_INPUTS; j++) {
 					if (values[i].m_inputs[j].node != NULL_INDEX) {
 						if (index_to_json_index.find(values[i].m_inputs[j].node) != index_to_json_index.end()) {
 							json unmatched_output;
@@ -1147,6 +1153,7 @@ void ComputationGraph::show_node(Index i, vector<Function>& functions) {
 		IM_ASSERT(0 && "Missing body for operation type");
 		break;
 	}
+
 	if (i == current_backwards_node ||
 		currentValue.m_operation == Operation::Parameter ||
 		currentValue.m_operation == Operation::Constant  ||

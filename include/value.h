@@ -47,6 +47,11 @@ struct Socket {
 	void from_json(json j);
 	Index node;
 	unsigned short slot;
+
+	friend bool operator<(const Socket& l, const Socket& r) {
+		return l.node < r.node || l.slot < r.slot;
+	}
+
 };
 
 struct Connection {

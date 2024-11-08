@@ -34,7 +34,7 @@ void Context::show_training_menu(bool* open) {
 	if (*open) {
 		//ImGui::SetNextWindowSize(ImVec2(200, 100));
 		if (ImGui::Begin("Training Menu", open)) {
-			const char* items[] = { "flat.csv", "wavy.csv", "donut.csv", "spiral.csv" };
+			const char* items[] = { "flat.csv", "wavy.csv", "donut.csv", "spiral.csv", "donut_circle.csv"};
 
 			static int item_current_idx = 0;                    // Here our selection data is an index.
 			const char* combo_label = items[item_current_idx];
